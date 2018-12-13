@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    订单详情
+{% endblock %}
+
+{% block extcss %}
+    <link rel="stylesheet" href="{% static 'order/css/orderdetail.css' %}">
+{% endblock %}
+
+
+{% block extjs %}
+    <script src="{% static 'order/js/orderdetail.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="orderdetail">
+        <div class="back">
+            <a href="{% url 'axf:mine' %}">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+
+        <p class="identifier">
+            订单号: {{ order.identifier }}
+        </p>
+
+        <ul>
+            {% for ordergoods in order.ordergoods_set.all %}
+                <li>
+                    <div class="content-wrapper">
+                        <div class="img">
+                            <img src="{{ ordergoods.goods.productimg }}" alt="">
+                        </div>
+                        <div class="detail">
+                            <p class="name">{{ ordergoods.goods.productlongname }}</p>
+                            <p class="price">￥{{ ordergoods.goods.price }}</p>
+                            <p class="num">x{{ ordergoods.number }}</p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="bill">
+            {% if order.status == 0 %}
+                <div class="bill-right">付款</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

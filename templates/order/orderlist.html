@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    订单列表
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="orderlist">
+        {% for order in orders %}
+            <p>
+                <a href="{% url 'axf:orderdetail' order.identifier %}">
+                    {{ forloop.counter }},{{ order.identifier }}
+                    <span style="color: white;background: red">
+                        {% if order.status == 0 %}
+                            未付款
+                        {% elif order.status == 1 %}
+                            已付款(未发货)
+                        {% elif order.status == 2 %}
+                            已签收
+                        {% endif %}
+                    </span>
+                </a>
+            </p>
+        {% endfor %}
+    </div>
+{% endblock %}

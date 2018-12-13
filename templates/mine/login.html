@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block extcss %}
+    <link rel="stylesheet" href="{% static 'mine/css/login.css' %}">
+{% endblock %}
+
+{% block extjs %}
+    <script src="{% static 'mine/js/login.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    爱鲜蜂 | 登录
+{% endblock %}
+
+{% block content %}
+    <div class="login">
+        <div class="back">
+            <a href="{% url 'axf:mine' %}">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+
+        <form action="{% url 'axf:login' %}" method="post" id="login-view">
+            {% csrf_token %}
+{#            邮箱#}
+            <div class="form-group has-feedback" id="email">
+                <input type="text" class="form-control" aria-describedby="inputSuccess2Status" placeholder="邮箱" name="email">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <p>
+                    {{ u_err }}
+                </p>
+            </div>
+
+{#             密码#}
+            <div class="form-group has-feedback" id="password">
+                <input type="password" class="form-control" aria-describedby="inputSuccess2Status" placeholder="密码" name="password">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <p>
+                    {{ p_err }}
+                </p>
+            </div>
+
+            <input type="submit" value="登录" id="subButton" disabled="disabled">
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
